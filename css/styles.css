@@ -1,0 +1,52 @@
+h1 {
+    font-family: "Press Start 2P", "Brush Script MT", "Lucida Handwriting", cursive;
+    font-size: 5em;
+    text-align: center;
+    margin: 0.7em;
+    color: black;
+}
+
+p {
+    font-family: "VT323", 'Times New Roman', Times, serif;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+div {
+    border: 1px solid #964747;
+}
+
+.workspaceDiv{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.leftDiv {
+    float: left;
+    padding: 1%;
+    width: 21%;
+}
+
+.middleDiv {
+    float: left;
+    padding: 1%;
+    width: 56%;
+}
+
+.rightDiv {   
+    float: left;
+    padding: 1%;
+    width: 11%;
+}
+
+
+.grid {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.cell {
+    border: 1px solid black;
+    background-color: 009900;
+    padding: 0.3px;
+}
