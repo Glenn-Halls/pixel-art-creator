@@ -46,9 +46,10 @@ function createMatrix(columns, rows) {
 
 
 function createGrid(matrix) {
+    middleDiv.innerHTML = "";
     let gridArray = matrix.reverse();
-    let rows = matrix.length,
-    columns = matrix[0].length;
+    let rows = matrix.length;
+    let columns = matrix[0].length;
     for (let y = 0; y < rows; y++) {
         console.log(gridArray[y]);
         let reverseArray = gridArray[y].reverse();
@@ -57,8 +58,10 @@ function createGrid(matrix) {
             console.log((gridArray[y])[x]);
             middleDiv.insertAdjacentHTML("afterbegin", `<div class="cell">${(gridArray[y])[x]}</div>`);
         }
+        reverseArray = gridArray[y].reverse();
         middleDiv.insertAdjacentHTML("afterbegin", "<div></div>");
     }
+    matrix = matrix.reverse();
 }
 
 
