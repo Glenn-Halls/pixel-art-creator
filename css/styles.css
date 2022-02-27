@@ -6,6 +6,9 @@ h1 {
     color: black;
 }
 
+body {
+}
+
 p {
     font-family: "VT323", 'Times New Roman', Times, serif;
     font-size: 1.5em;
@@ -31,6 +34,10 @@ div {
     float: left;
     padding: 1%;
     width: 56%;
+    text-align: center;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
 }
 
 #rightDiv {   
@@ -49,4 +56,9 @@ div {
     border: 1px solid black;
     background-color: 009900;
     padding: 0.3px;
+    height: 23px;
+    width: 23px;
+    margin: 1px;
+    display: flex;
+    justify-content: center;
 }
