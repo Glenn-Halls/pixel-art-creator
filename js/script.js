@@ -6,6 +6,18 @@ const headingArray = Array.from(headingElement.innerText);
 const h1TimeVar = 123,
 pTimeVar = 123;
 
+//color variables
+const white = "#ffffff",
+black = "#000000",
+grey = "#bcbcbc",
+red = "#ff0000",
+orange = "#ffa500",
+yellow = "#ffff00",
+green = "#008000",
+blue = "#0000ff",
+indigo = "#4b0082",
+violet = "#ee82ee";
+
 function createMatrix(columns, rows) {
     // Creates a matrix of arrays within an array with each element representing a cell with unique coordinates
     let matrix = [],
