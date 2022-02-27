@@ -6,6 +6,28 @@ const headingArray = Array.from(headingElement.innerText);
 const h1TimeVar = 123,
 pTimeVar = 123;
 
+function createMatrix(columns, rows) {
+    // Creates a matrix of arrays within an array with each element representing a cell with unique coordinates
+    let matrix = [],
+    columnArray = [],
+    rowArray = [],
+    coordinates = [];
+    for (let x = 0; x < columns; x++) {
+        columnArray.push(x);
+    }
+    for (let y = 0; y < rows; y++) {
+        rowArray.push(y);
+    }
+    console.log(matrix);
+    for (let z = 0; z < columns; z++) {
+        rowArray.forEach(element => coordinates.push(columnArray[z] + "-" + rowArray[element]));
+        matrix.push(coordinates);
+        console.log(matrix);
+        coordinates = [];
+    }
+    return matrix;
+}
+
 function typeHeading() {
     // animates the h1 element to be typed out
     headingElement.textContent = ''
