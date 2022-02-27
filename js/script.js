@@ -14,4 +14,13 @@ function typeHeading() {
     }
 }
 
+function colorLetter(char, color) {
+    // changes the color of a character in h1
+    headingArray.splice(char, 1, `<font color = '${color}'>${headingArray[char]}</font>`);
+    var newVar = headingArray.join("");
+    console.log(headingArray);
+    console.log(newVar);
+    headingElement.innerHTML = newVar;
+}
+
 typeHeading();
