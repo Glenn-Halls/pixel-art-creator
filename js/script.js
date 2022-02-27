@@ -1,9 +1,11 @@
 // Global Variables
-const headingElement = document.querySelector('h1');
-const headingArray = Array.from(headingElement.innerText);
-const middleDiv = document.getElementById("middleDiv");
-const leftDiv = document.getElementById("leftDiv");
-const rightDiv = document.getElementById("rightDiv");
+var headingElement = document.querySelector('h1');
+var headingArray = Array.from(headingElement.innerText);
+var middleDiv = document.getElementById("middleDiv");
+var leftDiv = document.getElementById("leftDiv");
+var rightDiv = document.getElementById("rightDiv");
+var workspaceDiv = document.getElementById("workspaceDiv");
+var gridDiv = document.getElementById("gridDiv");
 
 // Variables to control speed of typing
 const h1TimeVar = 123,
@@ -19,7 +21,18 @@ yellow = "#ffff00",
 green = "#008000",
 blue = "#0000ff",
 indigo = "#4b0082",
-violet = "#ee82ee";
+violet = "#ee82ee",
+colors = [red, orange, yellow, green, blue, indigo, violet];
+
+//prevents browser zoom
+const preventZoom = function(e) {
+    if(e.ctrlKey || e.metaKey)
+        e.preventDefault();
+};
+window.addEventListener("wheel", preventZoom, {passive: false});
+window.addEventListener("keydown", preventZoom, {passive: false});
+
+
 
 function createMatrix(columns, rows) {
     // Creates a matrix of arrays within an array with each element representing a cell with unique coordinates
@@ -33,11 +46,9 @@ function createMatrix(columns, rows) {
     for (let y = 0; y < rows; y++) {
         rowArray.push(y);
     }
-    console.log(matrix);
     for (let z = 0; z < columns; z++) {
         rowArray.forEach(element => coordinates.push(columnArray[z] + "-" + rowArray[element]));
         matrix.push(coordinates);
-        console.log(matrix);
         coordinates = [];
     }
     matrix = matrix.reverse();
@@ -46,16 +57,15 @@ function createMatrix(columns, rows) {
 
 
 function createGrid(matrix) {
-    middleDiv.innerHTML = "";
     let gridArray = matrix.reverse();
     let rows = matrix.length;
     let columns = matrix[0].length;
+    workspaceDiv.innerHTML = `<div id='gridDiv' style = "width: ${columns * 25.6}px; height: ${rows * 25.6}px"><div id = 'middleDiv' style = "width: ${columns * 25.6}px; height: ${rows * 25.6}px"></div></div>`;
+    gridDiv = document.getElementById("gridDiv");
+    middleDiv = document.getElementById("middleDiv");
     for (let y = 0; y < rows; y++) {
-        console.log(gridArray[y]);
         let reverseArray = gridArray[y].reverse();
-        console.log(reverseArray);
         for (let x = 0; x < columns; x++) {
-            console.log((gridArray[y])[x]);
             middleDiv.insertAdjacentHTML("afterbegin", `<div class="cell">${(gridArray[y])[x]}</div>`);
         }
         reverseArray = gridArray[y].reverse();
