@@ -55,9 +55,9 @@ function createGrid(matrix) {
         console.log(reverseArray);
         for (let x = 0; x < columns; x++) {
             console.log((gridArray[y])[x]);
-            middleDiv.insertAdjacentHTML("afterbegin", `[${(gridArray[y])[x]}]`);
+            middleDiv.insertAdjacentHTML("afterbegin", `<div class="cell">${(gridArray[y])[x]}</div>`);
         }
-        middleDiv.insertAdjacentHTML("afterbegin", "<br>");
+        middleDiv.insertAdjacentHTML("afterbegin", "<div></div>");
     }
 }
 
@@ -80,4 +80,4 @@ function colorLetter(char, color) {
 }
 
 typeHeading();
-var testMatrix = createMatrix(7,9);
+var testMatrix = createMatrix(20,20);

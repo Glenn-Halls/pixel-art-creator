@@ -7,6 +7,7 @@ h1 {
 }
 
 body {
+    justify-content: center;
 }
 
 p {
@@ -16,40 +17,44 @@ p {
 }
 
 div {
-    border: 1px solid #964747;
+    border: 1px;
+    width: 100%;
 }
 
 #workspaceDiv{
     display: flex;
     flex-wrap: nowrap;
+    width: 600px;
 }
 
 #leftDiv {
     float: left;
     padding: 1%;
-    width: 21%;
+    width: 150px;
 }
 
 #middleDiv {
     float: left;
     padding: 1%;
-    width: 56%;
+    width: 590px;
     text-align: center;
-    font-size: 2em;
+    font-size: 0.5em;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 #rightDiv {   
     float: left;
     padding: 1%;
-    width: 11%;
+    width: 150px;
 }
 
 
 #grid {
     display: flex;
     flex-wrap: nowrap;
+    width: 600px;
 }
 
 .cell {
@@ -61,4 +66,18 @@ div {
     margin: 1px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    float: left;
+    font-size: 9px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.noWrap {
+    width: 100%;
+    display: flex;
 }
