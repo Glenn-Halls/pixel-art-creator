@@ -37,6 +37,7 @@ function createMatrix(columns, rows) {
         console.log(matrix);
         coordinates = [];
     }
+    matrix = matrix.reverse();
     return matrix;
 }
 
@@ -58,3 +59,4 @@ function colorLetter(char, color) {
 }
 
 typeHeading();
+var testMatrix = createMatrix(7,9);
