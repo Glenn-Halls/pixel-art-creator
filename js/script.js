@@ -1,6 +1,9 @@
 // Global Variables
 const headingElement = document.querySelector('h1');
 const headingArray = Array.from(headingElement.innerText);
+const middleDiv = document.getElementById("middleDiv");
+const leftDiv = document.getElementById("leftDiv");
+const rightDiv = document.getElementById("rightDiv");
 
 // Variables to control speed of typing
 const h1TimeVar = 123,
@@ -40,6 +43,24 @@ function createMatrix(columns, rows) {
     matrix = matrix.reverse();
     return matrix;
 }
+
+
+function createGrid(matrix) {
+    let gridArray = matrix.reverse();
+    let rows = matrix.length,
+    columns = matrix[0].length;
+    for (let y = 0; y < rows; y++) {
+        console.log(gridArray[y]);
+        let reverseArray = gridArray[y].reverse();
+        console.log(reverseArray);
+        for (let x = 0; x < columns; x++) {
+            console.log((gridArray[y])[x]);
+            middleDiv.insertAdjacentHTML("afterbegin", `[${(gridArray[y])[x]}]`);
+        }
+        middleDiv.insertAdjacentHTML("afterbegin", "<br>");
+    }
+}
+
 
 function typeHeading() {
     // animates the h1 element to be typed out
