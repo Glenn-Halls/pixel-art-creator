@@ -24,13 +24,22 @@ indigo = "#4b0082",
 violet = "#ee82ee",
 colors = [red, orange, yellow, green, blue, indigo, violet];
 
-//prevents browser zoom
-const preventZoom = function(e) {
-    if(e.ctrlKey || e.metaKey)
-        e.preventDefault();
-};
-window.addEventListener("wheel", preventZoom, {passive: false});
-window.addEventListener("keydown", preventZoom, {passive: false});
+// Prevents resizing with ctrl + mousewheel
+window.addEventListener("wheel", (event) => {
+    if (event.ctrlKey || event.metaKey)
+        event.preventDefault();
+}, {passive: false});
+
+
+// Prevents resizing with ctrl + =/-
+window.addEventListener("keydown", (event) => {
+    if (event.key === '=') {
+        event.preventDefault();
+    }
+    else if (event.key === '-') {
+        event.preventDefault();
+    }    
+});
 
 
 
