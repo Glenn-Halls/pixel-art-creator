@@ -26,6 +26,11 @@ div {
     row-gap: 0px;
 }
 
+input[type=submit] {
+    width: 107px;
+    height: 107px;
+}
+
 #workspaceDiv{
     display: flex;
     flex-wrap: nowrap;
@@ -61,9 +66,13 @@ div {
 }
 
 #rightDiv {   
-    float: left;
-    padding: 1%;
-    width: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 200px;
+    max-height: 600px;
+    justify-self: left;
+    user-select: none;
 }
 
 
@@ -77,6 +86,17 @@ div {
     margin: 0;
     justify-content: center;
     justify-self: center;
+}
+
+#settings {
+    width: 107px;
+    height: 107px;
+    max-height: 107px;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .cell {
@@ -139,4 +159,7 @@ div {
     padding: 0px;
     margin: -1.5px;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
 }

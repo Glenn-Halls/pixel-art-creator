@@ -45,19 +45,38 @@
                 
             </div>
         </div>
-            <div id = "workspaceDiv">
-                 <div id = "gridDiv" style = "width: 100px; height: 100px; border: white;">
-                    <div id = "middleDiv">
-                        <p>
-                            middleDiv
-                        </p>
-                    </div>  
+        <div id = "workspaceDiv">
+            <div id = "gridDiv" style = "width: 100px; height: 100px; border: white;">
+                <div id = "middleDiv">
+                    <p>
+                        middleDiv
+                    </p>
+                </div>  
                 </div>
             </div>
-        <div id = "rightDiv">
-            <p>
-                rightDiv
-            </p>
+            <div id = "rightDiv">
+                <div style = "height: 55px; display: grid; justify-content: center;"><p style = "margin: 0%; align-self: center;">GRID</p></div>
+                <div id = "settings">
+                    <input type = "submit" id = "createGrid" name = "Create" value = "Create Grid">
+                    <div style = "height: 30px;"></div>
+                    Grid Rows:
+                    <br>
+                    <input type = "number" id = "inputRows" name = "Rows" min = "1" max = "20" value="20">
+                    <br>
+                    Grid Columns:
+                    <br>
+                    <input type = "number" id = "inputColumns" name = "Columns" min = "1" max = "20" value="20">
+                    <div style = "height: 10px;"></div>
+                    <p style = "width: 112px; height: 33    px; padding: 0; margin: 10px;">
+                        EZ-Grid:
+                    </p>
+                    <div id = "5x5" class="colorPickCell">5 x 5</div>
+                    <div id = "10x10" class="colorPickCell">10 x 10</div>
+                    <div id = "15x15" class="colorPickCell">15 x 15</div>
+                    <div id = "20x20" class="colorPickCell">20 x 20</div>
+                    <div style = "height: 30px;"></div>
+                    <div id = "customSelect" class="colorPickCell" style = "height: 70px; width: 70px; display: grid; justify-content: center;"><p style = "margin: 0%; align-self: center; pointer-events: none; font-size: 16pt;">SELECT<br>CUSTOM<br>COLOR</p></div>
+                </div>
         </div>
     </div>
     <script src="js/script.js"></script>
