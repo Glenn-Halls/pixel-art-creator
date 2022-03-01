@@ -46,7 +46,7 @@ window.addEventListener("keydown", (event) => {
     else if (event.key === '-') {
         event.preventDefault();
     }    
-});
+}, {passive: false});
 
 // Prevents right-click context menus on work space
 workspaceDiv.addEventListener('contextmenu', e => e.preventDefault())
@@ -64,11 +64,17 @@ function selectColor(event) {
             let colorBox = leftClick.getElementsByClassName("cellColor")[0];
             let insideHTML = colorBox.innerHTML;
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${clickColor};">${insideHTML}\n</div>`;
+            leftClick = document.getElementById("leftClick");
+            rightClick = document.getElementById("rightClick");
         }
     }
     else if (event.button === 2) {
         if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick")) {
-            console.log("right click")
+            rightClickColor = event.target.id;
+            let colorBox = rightClick.getElementsByClassName("cellColor")[0];
+            colorBox.outerHTML = `<div class="cellColor" style="background-color: ${rightClickColor};">\n</div>`;
+            leftClick = document.getElementById("leftClick");
+            rightClick = document.getElementById("rightClick");
         }
     }
 }
