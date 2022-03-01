@@ -11,12 +11,6 @@
 </head>
 
 <body>
-    <script>
-        document.body.addEventListener("wheel", e=>{
-          if(e.ctrlKey)
-            e.preventDefault();//prevent zoom
-        });
-    </script>
     <h1>
         Pixel Art Creator
     </h1>
@@ -26,17 +20,24 @@
     <div class="container">
         <div id = "leftDiv">
             <div id = "colorPicker">
-                Color Picker
-                <div class="colorPickCell"> black </div>
-                <div class="colorPickCell"> white </div>
-                <div class="colorPickCell"> grey </div>
-                <div class="colorPickCell"> red </div>
-                <div class="colorPickCell"> orange </div>
-                <div class="colorPickCell"> yellow  </div>
-                <div class="colorPickCell"> green </div>
-                <div class="colorPickCell"> blue </div>
-                <div class="colorPickCell"> indigo </div>
-                <div class="colorPickCell"> violet </div>
+                <div style = "height: 70px; display: grid; justify-content: center;"><p style = "margin: 0%; align-self: center;">COLOR</p></div>
+                <div class="colorPickCell" style = "height: 107px; width: 107px;">
+                    <div class="colorPickCell" style = "height: 37px; width: 37px; margin: -3px;"></div>
+                </div>
+                <div style = "height: 30px;"></div>
+                <div id = "black" class="colorPickCell" style = "background-color: #000000;"></div>
+                <div id = "white" class="colorPickCell" style = "background-color: #ffffff;"></div>
+                <div id = "grey" class="colorPickCell" style = "background-color: #bcbcbc;"></div>
+                <div id = "red" class="colorPickCell" style = "background-color: #ff0000;"></div>
+                <div id = "orange" class="colorPickCell" style = "background-color: #ffa500;"></div>
+                <div id = "yellow" class="colorPickCell" style = "background-color: #ffff00;"> </div>
+                <div id = "green" class="colorPickCell" style = "background-color: #008000;"></div>
+                <div id = "blue" class="colorPickCell" style = "background-color: #0000ff;"></div>
+                <div id = "indigo" class="colorPickCell" style = "background-color: #4b0082;"></div>
+                <div id = "violet" class="colorPickCell" style = "background-color: #ee82ee;"></div>
+                <div style = "height: 30px;"></div>
+                <div id = "customColor" class="colorPickCell" style = "height: 70px; width: 70px; display: grid; justify-content: center;"><p style = "margin: 0%; align-self: center;">CUSTOM</p></div>
+                
             </div>
         </div>
             <div id = "workspaceDiv">
