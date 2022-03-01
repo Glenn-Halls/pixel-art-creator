@@ -6,6 +6,8 @@ var leftDiv = document.getElementById("leftDiv");
 var rightDiv = document.getElementById("rightDiv");
 var workspaceDiv = document.getElementById("workspaceDiv");
 var gridDiv = document.getElementById("gridDiv");
+var leftClick = document.getElementById("leftClick");
+var rightClick = document.getElementById("rightClick");
 
 // Variables to control speed of typing
 const h1TimeVar = 123,
@@ -27,6 +29,7 @@ colors = [red, orange, yellow, green, blue, indigo, violet];
 // Variable to control color pickers
 var clickColor = black
 var rightClickColor = white
+var customColor = "#ffffff"
 
 // Prevents resizing with ctrl + mousewheel
 window.addEventListener("wheel", (event) => {
@@ -47,9 +50,28 @@ window.addEventListener("keydown", (event) => {
 
 // Prevents right-click context menus on work space
 workspaceDiv.addEventListener('contextmenu', e => e.preventDefault())
+leftDiv.addEventListener('contextmenu', e => e.preventDefault())
 
 // Listens for mouse click
 workspaceDiv.addEventListener("mousedown", colorCell);
+leftDiv.addEventListener("mousedown", selectColor);
+
+function selectColor(event) {
+    // Changes color variable based on left / right  mouse click
+    if (event.button === 0) {
+        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick")) {
+            clickColor = event.target.id;
+            let colorBox = leftClick.getElementsByClassName("cellColor")[0];
+            let insideHTML = colorBox.innerHTML;
+            colorBox.outerHTML = `<div class="cellColor" style="background-color: ${clickColor};">${insideHTML}\n</div>`;
+        }
+    }
+    else if (event.button === 2) {
+        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick")) {
+            console.log("right click")
+        }
+    }
+}
 
 
 function colorCell(event) {
