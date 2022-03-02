@@ -26,9 +26,13 @@ div {
     row-gap: 0px;
 }
 
-input[type=submit] {
+button {
     width: 107px;
     height: 107px;
+}
+
+input[type=number] {
+    width: 45px;
 }
 
 #workspaceDiv{

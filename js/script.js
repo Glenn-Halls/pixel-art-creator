@@ -8,6 +8,12 @@ var workspaceDiv = document.getElementById("workspaceDiv");
 var gridDiv = document.getElementById("gridDiv");
 var leftClick = document.getElementById("leftClick");
 var rightClick = document.getElementById("rightClick");
+const createGridButtom = document.getElementById("createGrid");
+const button5x5 = document.getElementById("5x5");
+const button10x10 = document.getElementById("10x10");
+const button15x15 = document.getElementById("15x15");
+const button20x20 = document.getElementById("20x20");
+const colorInput = document.getElementById("inputColor");
 var gridMatrix = [];
 
 // Variables to control speed of typing
@@ -60,7 +66,7 @@ leftDiv.addEventListener("mousedown", selectColor);
 function selectColor(event) {
     // Changes color variable based on left / right  mouse click
     if (event.button === 0) {
-        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick")) {
+        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick") && (event.target.id != "customColor")) {
             clickColor = event.target.id;
             let colorBox = leftClick.getElementsByClassName("cellColor")[0];
             let insideHTML = colorBox.innerHTML;
@@ -70,7 +76,7 @@ function selectColor(event) {
         }
     }
     else if (event.button === 2) {
-        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick")) {
+        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick") && (event.target.id != "customColor")) {
             rightClickColor = event.target.id;
             let colorBox = rightClick.getElementsByClassName("cellColor")[0];
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${rightClickColor};">\n</div>`;
