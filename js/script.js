@@ -16,6 +16,7 @@ const button20x20 = document.getElementById("20x20");
 const colorInput = document.getElementById("inputColor");
 const inputRows = document.getElementById("inputRows");
 const inputColumns = document.getElementById("inputColumns");
+const customColorBox = document.getElementById("customColor");
 var gridMatrix = [];
 
 // Variables to control speed of typing
@@ -65,6 +66,16 @@ leftDiv.addEventListener('contextmenu', e => e.preventDefault())
 workspaceDiv.addEventListener("mousedown", colorCell);
 leftDiv.addEventListener("mousedown", selectColor);
 createGridButtom.addEventListener("mousedown", createGridFromButton);
+colorInput.addEventListener("input", customColorInput);
+
+function customColorInput() {
+    console.log(colorInput.value);
+    customColor = colorInput.value;
+    customColorBox.innerHTML = `<div class = "cellColor" style = "background-color: ${customColor}"></div>`;
+    
+
+
+}
 
 function createGridFromButton(event) {
     if ((inputColumns.value < 1) || (inputColumns.value > 20) || (inputRows.value < 1) || (inputRows.value > 20)) {
@@ -178,5 +189,3 @@ function makeGrid(_M_, _N_) {
 }
 
 typeHeading();
-
-makeGrid(20,20);

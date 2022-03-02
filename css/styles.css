@@ -103,6 +103,20 @@ input[type=number] {
     flex-wrap: wrap;
 }
 
+#customColor {
+    width: 70px;
+    height: 70px;
+    display: grid;
+    justify-content: center;
+    border: 3px solid black;
+    padding: 0px;
+    margin: -1.5px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    float: left;
+}
+
 .cell {
     border: 0 solid black;
     background-color: 009900;
@@ -166,4 +180,5 @@ input[type=number] {
     justify-content: center;
     align-items: center;
     font-size: 0.9em;
+    float: left;
 }
