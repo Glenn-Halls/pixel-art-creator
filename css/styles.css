@@ -115,6 +115,7 @@ input[type=number] {
     align-items: center;
     font-size: 0.9em;
     float: left;
+    pointer-events: all;
 }
 
 .cell {

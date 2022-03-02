@@ -71,7 +71,7 @@ colorInput.addEventListener("input", customColorInput);
 function customColorInput() {
     console.log(colorInput.value);
     customColor = colorInput.value;
-    customColorBox.innerHTML = `<div class = "cellColor" style = "background-color: ${customColor}"></div>`;
+    customColorBox.innerHTML = `<div class = "cellColor" style = "background-color: ${customColor}; pointer-events: none;"></div>`;
     
 
 
@@ -89,8 +89,19 @@ function createGridFromButton(event) {
 function selectColor(event) {
     // Changes color variable based on left / right  mouse click
     if (event.button === 0) {
+        // Event on left-click
         if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick") && (event.target.id != "customColor")) {
+            // Changes color when preset colors are left-clicked
             clickColor = event.target.id;
+            let colorBox = leftClick.getElementsByClassName("cellColor")[0];
+            let insideHTML = colorBox.innerHTML;
+            colorBox.outerHTML = `<div class="cellColor" style="background-color: ${clickColor};">${insideHTML}\n</div>`;
+            leftClick = document.getElementById("leftClick");
+            rightClick = document.getElementById("rightClick");
+        }
+        else if (event.target.id === "customColor") {
+            // Changes color when custom color is left-clicked
+            clickColor = customColor;
             let colorBox = leftClick.getElementsByClassName("cellColor")[0];
             let insideHTML = colorBox.innerHTML;
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${clickColor};">${insideHTML}\n</div>`;
@@ -99,8 +110,18 @@ function selectColor(event) {
         }
     }
     else if (event.button === 2) {
+        // Event on right-click
         if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick") && (event.target.id != "customColor")) {
+            // Changes color when preset colors are right-clicked
             rightClickColor = event.target.id;
+            let colorBox = rightClick.getElementsByClassName("cellColor")[0];
+            colorBox.outerHTML = `<div class="cellColor" style="background-color: ${rightClickColor};">\n</div>`;
+            leftClick = document.getElementById("leftClick");
+            rightClick = document.getElementById("rightClick");
+        }
+        if (event.target.id === "customColor") {
+            // Changes color when custom color is right-clicked
+            rightClickColor = customColor;
             let colorBox = rightClick.getElementsByClassName("cellColor")[0];
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${rightClickColor};">\n</div>`;
             leftClick = document.getElementById("leftClick");
