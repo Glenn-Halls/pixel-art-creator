@@ -14,6 +14,8 @@ const button10x10 = document.getElementById("10x10");
 const button15x15 = document.getElementById("15x15");
 const button20x20 = document.getElementById("20x20");
 const colorInput = document.getElementById("inputColor");
+const inputRows = document.getElementById("inputRows");
+const inputColumns = document.getElementById("inputColumns");
 var gridMatrix = [];
 
 // Variables to control speed of typing
@@ -62,6 +64,16 @@ leftDiv.addEventListener('contextmenu', e => e.preventDefault())
 // Listens for mouse click
 workspaceDiv.addEventListener("mousedown", colorCell);
 leftDiv.addEventListener("mousedown", selectColor);
+createGridButtom.addEventListener("mousedown", createGridFromButton);
+
+function createGridFromButton(event) {
+    if ((inputColumns.value < 1) || (inputColumns.value > 20) || (inputRows.value < 1) || (inputRows.value > 20)) {
+        alert("Error: your grid must be from 1 - 20 in both width and height");
+    }
+    else {
+        makeGrid(inputColumns.value, inputRows.value);
+    }
+}
 
 function selectColor(event) {
     // Changes color variable based on left / right  mouse click
@@ -160,7 +172,7 @@ function colorLetter(char, color) {
     headingElement.innerHTML = newVar;
 }
 
-function makeGrid(_N_, _M_) {
+function makeGrid(_M_, _N_) {
     gridMatrix = createMatrix(_N_, _M_);
     createGridFrom(gridMatrix);
 }
