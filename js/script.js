@@ -59,8 +59,8 @@ window.addEventListener("keydown", (event) => {
 }, {passive: false});
 
 // Prevents right-click context menus on work space
-workspaceDiv.addEventListener('contextmenu', e => e.preventDefault())
-leftDiv.addEventListener('contextmenu', e => e.preventDefault())
+workspaceDiv.addEventListener('contextmenu', e => e.preventDefault());
+leftDiv.addEventListener('contextmenu', e => e.preventDefault());
 
 // Listens for mouse click
 workspaceDiv.addEventListener("mousedown", colorCell);
@@ -68,7 +68,14 @@ leftDiv.addEventListener("mousedown", selectColor);
 createGridButtom.addEventListener("mousedown", createGridFromButton);
 colorInput.addEventListener("input", customColorInput);
 
+// Listens and responds to clicks on EZ Grid buttons
+button5x5.addEventListener("mousedown", e => {makeGrid(5, 5)});
+button10x10.addEventListener("mousedown", e => {makeGrid(10, 10)});
+button15x15.addEventListener("mousedown", e => {makeGrid(15, 15)});
+button20x20.addEventListener("mousedown", e => {makeGrid(20, 20)});
+
 function customColorInput() {
+    // Changes customColor variable and customColorBox color after custom color selection
     console.log(colorInput.value);
     customColor = colorInput.value;
     customColorBox.innerHTML = `<div class = "cellColor" style = "background-color: ${customColor}; pointer-events: none;"></div>`;
@@ -78,6 +85,7 @@ function customColorInput() {
 }
 
 function createGridFromButton(event) {
+    // Creates a new grid from inputted _N_ and _M_ values
     if ((inputColumns.value < 1) || (inputColumns.value > 20) || (inputRows.value < 1) || (inputRows.value > 20)) {
         alert("Error: your grid must be from 1 - 20 in both width and height");
     }
