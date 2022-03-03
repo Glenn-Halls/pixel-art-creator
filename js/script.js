@@ -9,6 +9,9 @@ gridDiv = document.getElementById("gridDiv"),
 leftClick = document.getElementById("leftClick"),
 rightClick = document.getElementById("rightClick"),
 middleClick = document.getElementById("middleClick"),
+exportMatrix = [],
+exportArray = [],
+savedMatrix = [],
 gridMatrix = [];
 
 const createGridButtom = document.getElementById("createGrid"),
@@ -19,7 +22,10 @@ button20x20 = document.getElementById("20x20"),
 colorInput = document.getElementById("inputColor"),
 inputRows = document.getElementById("inputRows"),
 inputColumns = document.getElementById("inputColumns"),
-customColorBox = document.getElementById("customColor");
+customColorBox = document.getElementById("customColor"),
+exportButton = document.getElementById("exportButton"),
+importButton = document.getElementById("importButton");
+
 
 // Variables to control speed of typing
 const h1TimeVar = 123,
@@ -41,8 +47,8 @@ colors = [red, orange, yellow, green, blue, indigo, violet];
 // Variable to control color pickers
 var clickColor = black
 var rightClickColor = white
-var customColor = "#ffffff"
-var middleClickColor = '#ffffff'
+var customColor = white
+var middleClickColor = white
 
 // Prevents resizing with ctrl + mousewheel
 window.addEventListener("wheel", (event) => {
@@ -50,6 +56,10 @@ window.addEventListener("wheel", (event) => {
         event.preventDefault();
 }, {passive: false});
 
+// Prevents middle click functionality
+window.addEventListener("mousedown", (event) => {
+    event.preventDefault();
+}, {passive: false});
 
 // Prevents resizing with ctrl + =/-
 window.addEventListener("keydown", (event) => {
@@ -70,6 +80,9 @@ workspaceDiv.addEventListener("mousedown", colorCell);
 leftDiv.addEventListener("mousedown", selectColor);
 createGridButtom.addEventListener("mousedown", createGridFromButton);
 colorInput.addEventListener("input", customColorInput);
+exportButton.addEventListener("mousedown", exportGrid);
+importButton.addEventListener("mousedown", importGrid);
+
 
 // Listens and responds to clicks on EZ Grid buttons
 button5x5.addEventListener("mousedown", e => {makeGrid(5, 5)});
@@ -157,10 +170,10 @@ function selectColor(event) {
 function colorCell(event) {
     // Changes cell color according to left, right or middle click
     if (event.button === 0) {
-        event.target.outerHTML = `<div class='cellColor' style = "background-color: ${clickColor}"></div>`
+        event.target.outerHTML = `<div class='cellColor' style = "background-color: ${clickColor}">\n</div>`
     }
     else if (event.button === 2) {
-        event.target.outerHTML = `<div class='cellColor' style = "background-color: ${rightClickColor}"></div>`
+        event.target.outerHTML = `<div class='cellColor' style = "background-color: ${rightClickColor}">\n</div>`
     }
     else if (event.button === 1) {
         // Changes all cells of the color that is clicked, to the middleClickColor
@@ -235,5 +248,63 @@ function makeGrid(_M_, _N_) {
     gridMatrix = createMatrix(_N_, _M_);
     createGridFrom(gridMatrix);
 }
+
+function exportGrid() {
+    savedMatrix = gridMatrix;
+    if (savedMatrix.length == 0){
+        alert("\nERROR, there is nothing to export\n\nPlease create a grid to get started!");
+    }
+    else {
+        exportMatrix = [];
+        for (let x = 0; x < savedMatrix.length; x++) {
+            exportArray = [];
+            for (let y = 0; y < savedMatrix[x].length; y++){
+                let id = document.getElementById(`${savedMatrix[x][y]}`);
+                if (id.innerHTML === `<div class="grid"></div>`) {
+                    exportArray.push("null");
+                }
+                else if (id.innerHTML === `<div class="cellColor" style="background-color: #ffffff">\n</div>`) {
+                    exportArray.push("white");
+                }
+                else if (id.innerHTML === `<div class="cellColor" style="background-color: #000000">\n</div>`) {
+                    exportArray.push("black")
+                }
+                else {
+                    let html = id.innerHTML;
+                    console.log(html);
+                    html = html.replace(`<div class="cellColor" style="background-color: `, "");
+                    html = html.replace(`\">\n</div>`, "");
+                    html = html.replace(`;\"></div>`, "");
+                    html = html.replace(`;`, "");
+                    html = html.replace("#", "$");
+                    console.log(html);
+                    exportArray.push(`${html}`);
+                }
+            }
+            exportMatrix.push(exportArray);
+        }
+    window.open(downloadableCSV(exportMatrix));
+    }
+}
+
+function importGrid() {
+    if (gridMatrix.length == 0) {
+        console.log("no matrix");
+    }
+    else {
+        for (let x = 0; x < gridMatrix.length; x++) {
+            console.log("goodbye")
+        }
+    }
+}
+
+function downloadableCSV(matrix) {
+    var content = "data:text/csv;charset=utf-8,";
+    matrix.forEach(function(matrix, index) {
+      content += matrix.join(",") + "\n";
+    }); 
+    return encodeURI(content);
+}
+
 
 typeHeading();

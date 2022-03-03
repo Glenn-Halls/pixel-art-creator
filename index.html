@@ -53,7 +53,7 @@
             <div id = "gridDiv" style = "width: 100px; height: 100px; border: white;">
                 <div id = "middleDiv">
                     <p>
-                        middleDiv
+                        [Workspace]
                     </p>
                 </div>  
                 </div>
@@ -80,9 +80,15 @@
                     <div class="colorPickCell"><button id = "20x20" class="ezButton">20 x 20</button></div>
                     <div style = "height: 30px;"></div>
                     <div id = "customSelect" class="colorPickCell" style = "height: 70px; width: 70px; display: grid; justify-content: center;"><p style = "margin: 0%; align-self: center; pointer-events: none; font-size: 16pt;">SELECT</p><input id = "inputColor" type = "color"><p style = "margin: 0%; align-self: center; pointer-events: none; font-size: 16pt;">COLOR</p>
+                    </div>
                 </div>
+            </div>
         </div>
-    </div>
-    <script src="js/script.js"></script>
-</body>
+        <div id = "footer">
+            <button id = "exportButton" class = "portButton"><p class = "portText">Export</p></button>
+            <div style = "width: 100px;"></div>
+            <input id = "importButton" class = "portButton" type = "file"><br>Custom Upload<br><output id = "output"></output>
+        </div>
+        <script src="js/script.js"></script>
+    </body>
 </html>
