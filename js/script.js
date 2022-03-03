@@ -1,23 +1,25 @@
 // Global Variables
-var headingElement = document.querySelector('h1');
-var headingArray = Array.from(headingElement.innerText);
-var middleDiv = document.getElementById("middleDiv");
-var leftDiv = document.getElementById("leftDiv");
-var rightDiv = document.getElementById("rightDiv");
-var workspaceDiv = document.getElementById("workspaceDiv");
-var gridDiv = document.getElementById("gridDiv");
-var leftClick = document.getElementById("leftClick");
-var rightClick = document.getElementById("rightClick");
-const createGridButtom = document.getElementById("createGrid");
-const button5x5 = document.getElementById("5x5");
-const button10x10 = document.getElementById("10x10");
-const button15x15 = document.getElementById("15x15");
-const button20x20 = document.getElementById("20x20");
-const colorInput = document.getElementById("inputColor");
-const inputRows = document.getElementById("inputRows");
-const inputColumns = document.getElementById("inputColumns");
-const customColorBox = document.getElementById("customColor");
-var gridMatrix = [];
+var headingElement = document.querySelector('h1'),
+headingArray = Array.from(headingElement.innerText),
+middleDiv = document.getElementById("middleDiv"),
+leftDiv = document.getElementById("leftDiv"),
+rightDiv = document.getElementById("rightDiv"),
+workspaceDiv = document.getElementById("workspaceDiv"),
+gridDiv = document.getElementById("gridDiv"),
+leftClick = document.getElementById("leftClick"),
+rightClick = document.getElementById("rightClick"),
+middleClick = document.getElementById("middleClick"),
+gridMatrix = [];
+
+const createGridButtom = document.getElementById("createGrid"),
+button5x5 = document.getElementById("5x5"),
+button10x10 = document.getElementById("10x10"),
+button15x15 = document.getElementById("15x15"),
+button20x20 = document.getElementById("20x20"),
+colorInput = document.getElementById("inputColor"),
+inputRows = document.getElementById("inputRows"),
+inputColumns = document.getElementById("inputColumns"),
+customColorBox = document.getElementById("customColor");
 
 // Variables to control speed of typing
 const h1TimeVar = 123,
@@ -40,6 +42,7 @@ colors = [red, orange, yellow, green, blue, indigo, violet];
 var clickColor = black
 var rightClickColor = white
 var customColor = "#ffffff"
+var middleClickColor = '#ffffff'
 
 // Prevents resizing with ctrl + mousewheel
 window.addEventListener("wheel", (event) => {
@@ -76,12 +79,8 @@ button20x20.addEventListener("mousedown", e => {makeGrid(20, 20)});
 
 function customColorInput() {
     // Changes customColor variable and customColorBox color after custom color selection
-    console.log(colorInput.value);
     customColor = colorInput.value;
     customColorBox.innerHTML = `<div class = "cellColor" style = "background-color: ${customColor}; pointer-events: none;"></div>`;
-    
-
-
 }
 
 function createGridFromButton(event) {
@@ -94,6 +93,12 @@ function createGridFromButton(event) {
     }
 }
 
+function reClick() {
+    leftClick = document.getElementById("leftClick");
+    rightClick = document.getElementById("rightClick");
+    middleClick = document.getElementById("middleClick");
+}
+
 function selectColor(event) {
     // Changes color variable based on left / right  mouse click
     if (event.button === 0) {
@@ -104,8 +109,6 @@ function selectColor(event) {
             let colorBox = leftClick.getElementsByClassName("cellColor")[0];
             let insideHTML = colorBox.innerHTML;
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${clickColor};">${insideHTML}\n</div>`;
-            leftClick = document.getElementById("leftClick");
-            rightClick = document.getElementById("rightClick");
         }
         else if (event.target.id === "customColor") {
             // Changes color when custom color is left-clicked
@@ -113,9 +116,8 @@ function selectColor(event) {
             let colorBox = leftClick.getElementsByClassName("cellColor")[0];
             let insideHTML = colorBox.innerHTML;
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${clickColor};">${insideHTML}\n</div>`;
-            leftClick = document.getElementById("leftClick");
-            rightClick = document.getElementById("rightClick");
         }
+    reClick();
     }
     else if (event.button === 2) {
         // Event on right-click
@@ -124,23 +126,36 @@ function selectColor(event) {
             rightClickColor = event.target.id;
             let colorBox = rightClick.getElementsByClassName("cellColor")[0];
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${rightClickColor};">\n</div>`;
-            leftClick = document.getElementById("leftClick");
-            rightClick = document.getElementById("rightClick");
         }
         if (event.target.id === "customColor") {
             // Changes color when custom color is right-clicked
             rightClickColor = customColor;
             let colorBox = rightClick.getElementsByClassName("cellColor")[0];
             colorBox.outerHTML = `<div class="cellColor" style="background-color: ${rightClickColor};">\n</div>`;
-            leftClick = document.getElementById("leftClick");
-            rightClick = document.getElementById("rightClick");
         }
+    reClick();
+    }
+    else if (event.button === 1) {
+        // Event on middle-click
+        if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick") && (event.target.id != "customColor")) {
+            // Changes color when preset colors are middle-clicked
+            middleClickColor = event.target.id;
+            let colorBox = middleClick.getElementsByClassName("cellColor")[0];
+            colorBox.outerHTML = `<div class="cellColor" style="background-color: ${middleClickColor};">\n</div>`;
+        }
+        if (event.target.id === "customColor") {
+            // Changes color when custom color is middle-clicked
+            middleClickColor = customColor;          
+            let colorBox = middleClick.getElementsByClassName("cellColor")[0];
+            colorBox.outerHTML = `<div class="cellColor" style="background-color: ${middleClickColor};">\n</div>`;
+        }
+    reClick();
     }
 }
 
 
 function colorCell(event) {
-    // Changes cell color according to left or right click
+    // Changes cell color according to left, right or middle click
     if (event.button === 0) {
         event.target.outerHTML = `<div class='cellColor' style = "background-color: ${clickColor}"></div>`
     }
@@ -148,10 +163,16 @@ function colorCell(event) {
         event.target.outerHTML = `<div class='cellColor' style = "background-color: ${rightClickColor}"></div>`
     }
     else if (event.button === 1) {
-    // Placeholder, will be used in the future to replace one color with another
-        console.log("middle-click")
+        // Changes all cells of the color that is clicked, to the middleClickColor
+        changeColor(event.target.outerHTML);
     }
 }
+
+
+function changeColor(colorSelect) {
+    middleDiv.innerHTML = middleDiv.innerHTML.replaceAll(colorSelect, middleClick.innerHTML);
+}
+
 
 function createMatrix(columns, rows) {
     // Creates a matrix of arrays within an array with each element representing a cell with unique coordinates
@@ -207,8 +228,6 @@ function colorLetter(char, color) {
     // changes the color of a character in h1
     headingArray.splice(char, 1, `<font color = '${color}'>${headingArray[char]}</font>`);
     var newVar = headingArray.join("");
-    console.log(headingArray);
-    console.log(newVar);
     headingElement.innerHTML = newVar;
 }
 
