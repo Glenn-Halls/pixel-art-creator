@@ -276,7 +276,7 @@ function exportGrid() {
                     html = html.replace(`\">\n</div>`, "");
                     html = html.replace(`;\"></div>`, "");
                     html = html.replace(`;`, "");
-                    html = html.replace("#", "$");
+                    html = html.replace("#", "!");
                     console.log(html);
                     exportArray.push(`${html}`);
                 }
