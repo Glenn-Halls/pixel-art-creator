@@ -353,5 +353,5 @@ function downloadableCSV(matrix) {
     return encodeURI(content);
 }
 
-
+// Animates heading on page load
 typeHeading();
