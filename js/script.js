@@ -61,7 +61,9 @@ window.addEventListener("wheel", (event) => {
 
 // Prevents middle click functionality
 window.addEventListener("mousedown", (event) => {
-    event.preventDefault();
+    if (event.button === 1) {
+        event.preventDefault();
+    }
 }, {passive: false});
 
 // Prevents resizing with ctrl + =/-
@@ -75,11 +77,11 @@ window.addEventListener("keydown", (event) => {
 }, {passive: false});
 
 // Prevents right-click context menus on work space
-rightDiv.addEventListener('contextmenu', e => e.preventDefault());
 workspaceDiv.addEventListener('contextmenu', e => e.preventDefault());
 gridDiv.addEventListener('contextmenu', e => e.preventDefault());
 middleDiv.addEventListener('contextmenu', e => e.preventDefault());
 leftDiv.addEventListener('contextmenu', e => e.preventDefault());
+rightDiv.addEventListener('contextmenu', e => e.preventDefault());
 
 // Listens and responds to mouse clicks
 workspaceDiv.addEventListener("mousedown", colorCell);
