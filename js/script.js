@@ -75,20 +75,19 @@ window.addEventListener("keydown", (event) => {
 }, {passive: false});
 
 // Prevents right-click context menus on work space
+rightDiv.addEventListener('contextmenu', e => e.preventDefault());
 workspaceDiv.addEventListener('contextmenu', e => e.preventDefault());
+gridDiv.addEventListener('contextmenu', e => e.preventDefault());
+middleDiv.addEventListener('contextmenu', e => e.preventDefault());
 leftDiv.addEventListener('contextmenu', e => e.preventDefault());
 
-// Listens for mouse click
+// Listens and responds to mouse clicks
 workspaceDiv.addEventListener("mousedown", colorCell);
 leftDiv.addEventListener("mousedown", selectColor);
 createGridButtom.addEventListener("mousedown", createGridFromButton);
 colorInput.addEventListener("input", customColorInput);
 exportButton.addEventListener("mousedown", exportGrid);
 importButton.addEventListener("input", importGrid);
-
-
-
-// Listens and responds to clicks on EZ Grid buttons
 button5x5.addEventListener("mousedown", e => {makeGrid(5, 5)});
 button10x10.addEventListener("mousedown", e => {makeGrid(10, 10)});
 button15x15.addEventListener("mousedown", e => {makeGrid(15, 15)});
@@ -111,13 +110,14 @@ function createGridFromButton(event) {
 }
 
 function reClick() {
+    // resets id values for displayed click boxes
     leftClick = document.getElementById("leftClick");
     rightClick = document.getElementById("rightClick");
     middleClick = document.getElementById("middleClick");
 }
 
 function selectColor(event) {
-    // Changes color variable based on left / right  mouse click
+    // Changes color variable based on left, right and middle mouse click
     if (event.button === 0) {
         // Event on left-click
         if ((event.target.id != "") && (event.target.id != "leftClick") && (event.target.id != "rightClick") && (event.target.id != "customColor")) {
@@ -187,6 +187,7 @@ function colorCell(event) {
 
 
 function changeColor(colorSelect) {
+    // changes color of selected box when clicked with custom color
     middleDiv.innerHTML = middleDiv.innerHTML.replaceAll(colorSelect, middleClick.innerHTML);
 }
 
@@ -242,18 +243,22 @@ function typeHeading() {
 }
 
 function colorLetter(char, color) {
-    // changes the color of a character in h1
+    // PLACEHOLDER: changes the color of a character in h1
     headingArray.splice(char, 1, `<font color = '${color}'>${headingArray[char]}</font>`);
     var newVar = headingArray.join("");
     headingElement.innerHTML = newVar;
 }
 
+
+
 function makeGrid(_M_, _N_) {
+    // Fulfils requirement from Udacity that a _N_ x _M_ grid must be created for the project
     gridMatrix = createMatrix(_N_, _M_);
     createGridFrom(gridMatrix);
 }
 
 function exportGrid() {
+    // Exports the created pixel art as a csv with each cell containing the color name or hash
     savedMatrix = gridMatrix;
     if (savedMatrix.length == 0){
         alert("\nERROR, there is nothing to export\n\nPlease create a grid to get started!");
@@ -291,7 +296,7 @@ function exportGrid() {
 
 
 function importGrid() {
-    // Imports the csv and uses textToMatrix, csvColorMatrix to recreate Matrix
+    // Imports the csv and uses textToMatrix & csvColorMatrix to recreate Matrix
     let csv = importButton.files[0];
     let reader = new FileReader();
     reader.readAsText(csv);
@@ -322,6 +327,7 @@ function textToMatrix() {
 }
 
 function colorGridFromCSV() {
+    // Loops through gridMatrix, using csvMatrix values to color each cell
     for (let x = 0; x < gridMatrix.length; x++) {
         for (let y = 0; y < gridMatrix[0].length; y++){
             let id = document.getElementById(`${gridMatrix[x][y]}`);
@@ -337,6 +343,7 @@ function colorGridFromCSV() {
 
 
 function downloadableCSV(matrix) {
+    // Saves and defines parameters for csv file
     var content = "data:text/csv;charset=utf-8,";
     matrix.forEach(function(matrix, index) {
       content += matrix.join(",") + "\n";
