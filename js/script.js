@@ -312,6 +312,8 @@ function importGrid() {
     reader.onerror = function () {
         console.log(reader.error)
     }
+    // Resets the import button value to allow restore to previous function
+    importButton.value = null;
 }
 
 function textToMatrix() {
