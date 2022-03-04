@@ -36,7 +36,6 @@ input[type=number] {
 }
 
 input[type="file"] {
-    display: none;
     width: 100x;
     height: 50px;
 }

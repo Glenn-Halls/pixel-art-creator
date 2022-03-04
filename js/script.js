@@ -12,7 +12,9 @@ middleClick = document.getElementById("middleClick"),
 exportMatrix = [],
 exportArray = [],
 savedMatrix = [],
-gridMatrix = [];
+gridMatrix = []
+csvText = "",
+csvMatrix = [];
 
 const createGridButtom = document.getElementById("createGrid"),
 button5x5 = document.getElementById("5x5"),
@@ -25,6 +27,7 @@ inputColumns = document.getElementById("inputColumns"),
 customColorBox = document.getElementById("customColor"),
 exportButton = document.getElementById("exportButton"),
 importButton = document.getElementById("importButton");
+
 
 
 // Variables to control speed of typing
@@ -81,7 +84,8 @@ leftDiv.addEventListener("mousedown", selectColor);
 createGridButtom.addEventListener("mousedown", createGridFromButton);
 colorInput.addEventListener("input", customColorInput);
 exportButton.addEventListener("mousedown", exportGrid);
-importButton.addEventListener("mousedown", importGrid);
+importButton.addEventListener("input", importGrid);
+
 
 
 // Listens and responds to clicks on EZ Grid buttons
@@ -271,13 +275,11 @@ function exportGrid() {
                 }
                 else {
                     let html = id.innerHTML;
-                    console.log(html);
                     html = html.replace(`<div class="cellColor" style="background-color: `, "");
                     html = html.replace(`\">\n</div>`, "");
                     html = html.replace(`;\"></div>`, "");
                     html = html.replace(`;`, "");
                     html = html.replace("#", "!");
-                    console.log(html);
                     exportArray.push(`${html}`);
                 }
             }
@@ -287,16 +289,52 @@ function exportGrid() {
     }
 }
 
+
 function importGrid() {
-    if (gridMatrix.length == 0) {
-        console.log("no matrix");
+    // Imports the csv and uses textToMatrix, csvColorMatrix to recreate Matrix
+    let csv = importButton.files[0];
+    let reader = new FileReader();
+    reader.readAsText(csv);
+    reader.onload = function () {
+        csvText = reader.result;
+        csvMatrix = textToMatrix();
+        makeGrid(csvMatrix[0].length, csvMatrix.length);
+        createGridFrom(gridMatrix);
+        colorGridFromCSV();
     }
-    else {
-        for (let x = 0; x < gridMatrix.length; x++) {
-            console.log("goodbye")
+    reader.onerror = function () {
+        console.log(reader.error)
+    }
+}
+
+function textToMatrix() {
+    // converts csv string to csvMatrix
+    csvText = csvText.replaceAll("!", "#");
+    csvText = csvText.replaceAll(",", "', '");
+    csvText = csvText.replaceAll("\n", "'], ['");
+    csvText = ("['" + `${csvText}`);
+    csvText = csvText.substring(0, csvText.length -4);
+    csvText = csvText.replaceAll("'", '"');
+    csvText = "[" + csvText
+    csvText += "]";
+    csvMatrix = JSON.parse(csvText);
+    return csvMatrix;
+}
+
+function colorGridFromCSV() {
+    for (let x = 0; x < gridMatrix.length; x++) {
+        for (let y = 0; y < gridMatrix[0].length; y++){
+            let id = document.getElementById(`${gridMatrix[x][y]}`);
+            if (csvMatrix[x][y] === "null") {
+                id.innerHTML = `<div class="grid"></div>`;
+            }
+            else {
+                id.innerHTML = `<div class="cellColor" style="background-color: ${csvMatrix[x][y]}">\n</div>`;
+            }
         }
     }
 }
+
 
 function downloadableCSV(matrix) {
     var content = "data:text/csv;charset=utf-8,";

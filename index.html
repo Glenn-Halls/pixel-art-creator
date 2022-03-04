@@ -87,7 +87,8 @@
         <div id = "footer">
             <button id = "exportButton" class = "portButton"><p class = "portText">Export</p></button>
             <div style = "width: 100px;"></div>
-            <input id = "importButton" class = "portButton" type = "file"><br>Custom Upload<br><output id = "output"></output>
+            <button class = "portButton" onclick="document.getElementById('importButton').click()"><p class = "portText">Import</p></button>
+            <input type='file' id="importButton" accept=".csv" style="display:none">
         </div>
         <script src="js/script.js"></script>
     </body>
